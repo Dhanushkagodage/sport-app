@@ -23,14 +23,15 @@ const PlayerRanking = () => {
 
     try {
       const response = await fetch(
-        "",
-       // "https://cricket-live-line1.p.rapidapi.com/playerRanking/1",
+        "https://cricket-live-line1.p.rapidapi.com/playerRanking/1",
         options
       );
       const json = await response.json();
       if (json && json.data) {
-        const rankedData = json.data.map((player: { rank: number; }) => {
-          const playerImage = players.find((p) => p.rank === player.rank)?.player;
+        const rankedData = json.data.map((player: { rank: number }) => {
+          const playerImage = players.find(
+            (p) => p.rank === player.rank
+          )?.player;
           return {
             ...player,
             playerImage,
@@ -92,29 +93,40 @@ const PlayerRanking = () => {
     },
   ];
 
-  const renderPlayerCard = ({ item }: { item: { rank: number; playerImage: any; name: string; rating: number; country: string } }) => {
+  const renderPlayerCard = ({
+    item,
+  }: {
+    item: {
+      rank: number;
+      playerImage: any;
+      name: string;
+      rating: number;
+      country: string;
+    };
+  }) => {
     return (
       <View style={styles.card}>
-        <View style={{ alignItems: "center", width: "10%",}}>
+        <View style={{ alignItems: "center", width: "10%" }}>
           <Text style={{ fontSize: 12, fontWeight: "400" }}>Rank</Text>
           <Text style={styles.rank}>{item.rank}</Text>
         </View>
 
         <View style={styles.countryFlag}>
           <Image
-            style={{ height: 50, width: 50, borderWidth: 1 ,borderRadius:30}}
-            source={item.playerImage || require("../../assets/images/sportLogo.png")}
+            style={{ height: 50, width: 50, borderWidth: 1, borderRadius: 30 }}
+            source={
+              item.playerImage || require("../../assets/images/sportLogo.png")
+            }
           />
         </View>
 
         <View style={styles.detailsContainer}>
           <Text style={styles.name}>{item.name}</Text>
-          <View style={{ flexDirection: "row",}}>
+          <View style={{ flexDirection: "row" }}>
             <Text style={styles.rating}>Country: {item.country}</Text>
-          <Text style={styles.rating}>Rating: {item.rating}</Text>
+            <Text style={styles.rating}>Rating: {item.rating}</Text>
+          </View>
         </View>
-        </View>
-        
       </View>
     );
   };
@@ -190,7 +202,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: "400",
     color: "#555",
-    marginRight: 15 
+    marginRight: 15,
   },
   header: {
     fontSize: 16,

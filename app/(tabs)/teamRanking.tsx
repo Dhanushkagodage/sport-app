@@ -23,8 +23,7 @@ const TeamRanking = () => {
 
     try {
       const response = await fetch(
-        "",
-        // "https://cricket-live-line1.p.rapidapi.com/teamRanking/1",
+        "https://cricket-live-line1.p.rapidapi.com/teamRanking/1",
         options
       );
       const json = await response.json();
@@ -155,7 +154,7 @@ const TeamRanking = () => {
           ) : (
             <Image
               style={{ height: 45, width: 60 }}
-              source={require("../../assets/images/sportLogo.png")} 
+              source={require("../../assets/images/sportLogo.png")}
             />
           )}
         </View>
