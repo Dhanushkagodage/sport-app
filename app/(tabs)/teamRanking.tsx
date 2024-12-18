@@ -17,7 +17,7 @@ const TeamRanking = () => {
       method: "GET",
       headers: {
         "X-RapidAPI-Host": "cricket-live-line1.p.rapidapi.com",
-        "X-RapidAPI-Key": "9f034dd713msh91e35c75e92d1c5p1acc66jsnd5229d616376",
+        "X-RapidAPI-Key": "a13bc60571msh6710c4d2fe09e25p1b835fjsn78671edb68f1",
       },
     };
 

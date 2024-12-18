@@ -1,23 +1,22 @@
 import React, { useState, useContext } from "react";
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
-import {Match} from "../types/match";
+import { Match } from "../types/match";
 import { useHeart } from "@/context/HeartContext";
 
 const MatchCard = ({ match }: { match: Match }) => {
   const [isAdded, setIsAdded] = useState(false);
 
-  const heartContext   = useHeart()
+  const heartContext = useHeart();
 
-  const {incrementHeartCount,decrementHeartCount}  = heartContext;
-
+  const { incrementHeartCount, decrementHeartCount } = heartContext;
 
   const toggleHeart = () => {
-    if(isAdded){
-        decrementHeartCount()
-        setIsAdded(false)
-    }else{
-incrementHeartCount()
-setIsAdded(true)
+    if (isAdded) {
+      decrementHeartCount();
+      setIsAdded(false);
+    } else {
+      incrementHeartCount();
+      setIsAdded(true);
     }
   };
 
@@ -40,16 +39,18 @@ setIsAdded(true)
       <View style={styles.footer}>
         <View>
           <Text style={styles.boldText}>Starts at {match.match_time}</Text>
-          <Text style={styles.venueText}>
+          <Text style={styles.venueText} ellipsizeMode="tail">
             <Text style={styles.boldText}>Venue:</Text>{" "}
-            <Text style={styles.venueHighlight}>{match.venue}</Text>
+            <Text style={styles.venueHighlight} >
+              {match.venue}
+            </Text>
           </Text>
         </View>
         <TouchableOpacity onPress={toggleHeart}>
           <Image
             source={
               isAdded
-                ? require("../assets/icons/heart-green.png")    
+                ? require("../assets/icons/heart-green.png")
                 : require("../assets/icons/heart.png")
             }
             style={styles.heartImage}
@@ -117,18 +118,21 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+    width: "100%",
+    paddingTop: 10,
+    paddingHorizontal:5
   },
   boldText: {
-    paddingLeft: 10,
     fontSize: 11,
     color: "black",
   },
   venueText: {
     fontSize: 12,
-    paddingLeft: 10,
+    justifyContent:"space-between"
   },
   venueHighlight: {
     color: "#0277BD",
+    overflow: "hidden",
   },
   heartImage: {
     width: 23,

@@ -1,5 +1,5 @@
 import React from "react";
-import { Tabs } from "expo-router";
+import { Tabs ,useLocalSearchParams  } from "expo-router";
 import { Image, View, StyleSheet, Text } from "react-native";
 
 const PlaceholderIcon = ({
@@ -17,7 +17,11 @@ const PlaceholderIcon = ({
         source={source}
         style={[
           styles.iconImage,
-          { tintColor: color, width: focused ? 28 : 25, height: focused ? 28 : 25 }, // Dynamic size
+          {
+            tintColor: color,
+            width: focused ? 28 : 25,
+            height: focused ? 28 : 25,
+          }, 
         ]}
         resizeMode="contain"
       />
@@ -26,6 +30,9 @@ const PlaceholderIcon = ({
 };
 
 const TabLayout = () => {
+
+  const { username } = useLocalSearchParams();
+  const usernameStr = Array.isArray(username) ? username[0] : username;
   return (
     <Tabs
       screenOptions={{
@@ -46,8 +53,7 @@ const TabLayout = () => {
       <Tabs.Screen
         name="upcomingMatches"
         options={{
-          title: "Upcoming Matches",
-          header: () => <CustomHeader />,
+          header: () => <CustomHeader username={usernameStr} />,
           tabBarIcon: ({ color, focused }) => (
             <PlaceholderIcon
               source={require("../../assets/icons/upcoming_matches.png")}
@@ -60,8 +66,7 @@ const TabLayout = () => {
       <Tabs.Screen
         name="teamRanking"
         options={{
-          title: "Team Ranking",
-          header: () => <CustomHeader />,
+          header: () => <CustomHeader username={usernameStr}/>,
           tabBarIcon: ({ color, focused }) => (
             <PlaceholderIcon
               source={require("../../assets/icons/team_rank.png")}
@@ -75,7 +80,7 @@ const TabLayout = () => {
         name="playerRanking"
         options={{
           title: "Player Ranking",
-          header: () => <CustomHeader />,
+          header: () => <CustomHeader username={usernameStr}/>,
           tabBarIcon: ({ color, focused }) => (
             <PlaceholderIcon
               source={require("../../assets/icons/player_rank.png")}
@@ -104,20 +109,25 @@ const styles = StyleSheet.create({
 
 export default TabLayout;
 
-const CustomHeader = () => {
+const CustomHeader = ({ username }: { username: string }) => {
   return (
     <View style={headerStyles.container}>
-      <Image
-        style={headerStyles.logo}
-        source={require("../../assets/images/sportLogo2.png")}
-        resizeMode="contain"
-      />
-      <View style={headerStyles.avatarContainer}>
+      <View style={headerStyles.header1}>
         <Image
-          style={headerStyles.avatarImage}
-          source={require("../../assets/images/avatar.png")}
-          resizeMode="cover" // Use "cover" for proper scaling.
+          style={headerStyles.logo}
+          source={require("../../assets/images/sportLogo2.png")}
+          resizeMode="contain"
         />
+        <View style={headerStyles.avatarContainer}>
+          <Image
+            style={headerStyles.avatarImage}
+            source={require("../../assets/images/avatar.png")}
+            resizeMode="cover"
+          />
+        </View>
+      </View>
+      <View>
+        <Text style={headerStyles.header2}>Welcome back,{username ? ` ${username}` : ""} 👋</Text>
       </View>
     </View>
   );
@@ -126,17 +136,27 @@ const CustomHeader = () => {
 const headerStyles = StyleSheet.create({
   container: {
     backgroundColor: "#1DA47C",
-    height: 80,
-    justifyContent: "space-between",
-    alignItems: "center",
-    flexDirection: "row",
     paddingHorizontal: 20,
+    paddingVertical: 20,
     zIndex: 1000,
   },
+
+  header1: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  header2: {
+    textAlign: "left",
+    color: "#adedd1",
+    marginBottom: 5,
+    fontWeight: "500",
+    fontSize: 18,
+    marginTop: 10,
+  },
   logo: {
-    width: 120, 
-    height: 100,
-    marginLeft: 15, 
+    width: 120,
+    height: 50,
   },
   avatarContainer: {
     backgroundColor: "white",
@@ -152,7 +172,7 @@ const headerStyles = StyleSheet.create({
     fontSize: 18,
   },
   avatarImage: {
-    width: "100%", 
+    width: "100%",
     height: "100%",
   },
 });

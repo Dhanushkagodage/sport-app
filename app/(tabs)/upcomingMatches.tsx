@@ -7,7 +7,7 @@ import {
   ActivityIndicator,
   Image,
 } from "react-native";
-import MatchCard from "../../components/matchCard"; // Adjust path as needed
+import MatchCard from "../../components/matchCard";
 import { Match } from "../../types/match";
 import { useHeart } from "@/context/HeartContext";
 
@@ -23,6 +23,7 @@ export default function UpcomingMatches() {
     const fetchMatches = async () => {
       try {
         const response = await fetch(
+          // "",
           "https://cricket-live-line1.p.rapidapi.com/upcomingMatches",
           {
             method: "GET",
@@ -59,12 +60,15 @@ export default function UpcomingMatches() {
     <View style={styles.container}>
       <View style={styles.headerRow}>
         <Text style={styles.header}>Upcoming Matches</Text>
-        <View style={styles.favoriteCount}>
-          <Image
-            source={require("../../assets/icons/heart-green.png")}
-            style={styles.image}
-          />
-          <Text style={styles.favoriteText}>{heartCount}</Text>
+        <View style={styles.favoriteCountContainer}>
+          <Text style={styles.favoriteCountText}>My Favorites :</Text>
+          <View style={styles.favoriteCount}>
+            <Image
+              source={require("../../assets/icons/heart-green.png")}
+              style={styles.image}
+            />
+            <Text style={styles.favoriteText}>{heartCount}</Text>
+          </View>
         </View>
       </View>
       <FlatList
@@ -87,7 +91,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    paddingRight: 10,
   },
   header: {
     fontSize: 16,
@@ -95,8 +98,20 @@ const styles = StyleSheet.create({
     marginVertical: 15,
   },
   favoriteCount: {
+    
+    paddingLeft: 5,
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  favoriteCountText:{
+    fontSize: 12,
+    color: "black",
+    fontWeight: "bold",
+  },
+  favoriteCountContainer:{
     backgroundColor: "#1DA47C18",
-    paddingHorizontal: 5,
+    paddingHorizontal: 10,
+    
     flexDirection: "row",
     alignItems: "center",
     borderRadius: 10,
@@ -107,6 +122,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 24,
   },
+
   listContent: {
     paddingBottom: 20,
   },

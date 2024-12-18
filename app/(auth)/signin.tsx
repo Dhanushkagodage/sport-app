@@ -91,8 +91,8 @@ const Signin = () => {
           </View>
 
           <TouchableOpacity style={styles.button} 
-         // onPress={handleLogin}
-          onPress={() => router.push(`/upcomingMatches`)}
+          onPress={handleLogin}
+          //onPress={() => router.push(`/upcomingMatches`)}
           >
             <Text style={styles.inputbuttontext}>LOGIN</Text>
           </TouchableOpacity>
