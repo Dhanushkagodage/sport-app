@@ -146,6 +146,7 @@ const headerStyles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
   },
+  
   header2: {
     textAlign: "left",
     color: "#adedd1",
@@ -154,10 +155,12 @@ const headerStyles = StyleSheet.create({
     fontSize: 18,
     marginTop: 10,
   },
+
   logo: {
     width: 120,
     height: 50,
   },
+
   avatarContainer: {
     backgroundColor: "white",
     width: 45,
@@ -167,10 +170,12 @@ const headerStyles = StyleSheet.create({
     alignItems: "center",
     overflow: "hidden",
   },
+
   avatarText: {
     color: "#2a2a2a",
     fontSize: 18,
   },
+
   avatarImage: {
     width: "100%",
     height: "100%",

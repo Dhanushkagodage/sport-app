@@ -37,6 +37,7 @@ export default function UpcomingMatches() {
         const json = await response.json();
         if (json.status) {
           setMatches(json.data);
+          
         }
       } catch (error) {
         console.error("Error fetching matches:", error);
