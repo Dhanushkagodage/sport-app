@@ -38,6 +38,7 @@ const PlayerRanking = () => {
           };
         });
         setData(rankedData);
+        console.log(rankedData);
       }
     } catch (error) {
       console.error("Error fetching player ranking:", error);
@@ -144,7 +145,9 @@ const PlayerRanking = () => {
       <Text style={styles.header}>Player Ranking</Text>
       <FlatList
         data={data}
-        keyExtractor={(item) => item.rank.toString()}
+        //keyExtractor={(item) => item.rank.toString()}
+        keyExtractor={(item) => `${item.rank}-${item.name}`}
+
         renderItem={renderPlayerCard}
         contentContainerStyle={styles.listContent}
       />
